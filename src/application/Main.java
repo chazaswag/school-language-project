@@ -12,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -60,6 +61,8 @@ public class Main extends Application {
 		
 		Window.getIcons().add(icon);
 		Window.setTitle("MFL login");
+		
+		AudioClip burger_snd = new AudioClip("burger.wav");
 		
 		Image logo = new Image("wolfreton.png");
 		ImageView imageview = new ImageView(logo);
@@ -212,7 +215,7 @@ public class Main extends Application {
 		correct.setStyle("-fx-background-color:#305494;");
 		correct.setFont(Font.font("Verdana",25));
 		correct.setTextFill(Color.BLACK);
-		correct.setText("café negro");
+		correct.setText("cafe negro");
 		correct.setLayoutX(1000);correct.setLayoutY(300);
 		correct.setOnAction (e -> {correct.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);test1.getChildren().add(testcontinue);
 		test1.getChildren().remove(correct);
@@ -401,25 +404,32 @@ public class Main extends Application {
 		BURGERinput.setFont(Font.font("Verdana",20));
 		
 		Text coffeewaterburger_txt = new Text();
-		
+		Button triNext_BTN = new Button(); 
+		triNext_BTN.setLayoutX(950); triNext_BTN.setLayoutY(490);
+		triNext_BTN.setText("Continue");
+		triNext_BTN.setFont(Font.font("Verdana",30));
+		Button tri_BTN = new Button();
+		tri_BTN.setText("Check");
+		tri_BTN.setLayoutX(650); tri_BTN.setLayoutY(490);
+		tri_BTN.setFont(Font.font("Verdana",30));
+		tri_BTN.setOnAction(e -> {String coffee = COFFEEinput.getText();String water = WATERinput.getText();String burger = BURGERinput.getText();String coffecorrect ="cafe negro";String watercorrect = "agua";String burgercorrect = " hamburguesas"; test1listen.getChildren().add(triNext_BTN);
+		if (!coffee.equals(coffecorrect)) {testScore.addAndGet(0);test1listen.getChildren().remove(tri_BTN); COFFEEinput.setStyle("-fx-background-color:#50C878;");
+	    } else {testScore.addAndGet(1);test1listen.getChildren().remove(tri_BTN); COFFEEinput.setStyle("-fx-background-color:#50C878;");
+	    if (!water.equals(watercorrect)) {testScore.addAndGet(0);test1listen.getChildren().remove(tri_BTN);WATERinput.setStyle("-fx-background-color:#FF2E2E;");
+	    } else {testScore.addAndGet(1);test1listen.getChildren().remove(tri_BTN); WATERinput.setStyle("-fx-background-color:#50C878;");
+		if (!burger.equals(burgercorrect)) {testScore.addAndGet(0);test1listen.getChildren().remove(tri_BTN);BURGERinput.setStyle("-fx-background-color:#FF2E2E;");
+	    } else {testScore.addAndGet(1);test1listen.getChildren().remove(tri_BTN); BURGERinput.setStyle("-fx-background-color:#50C878;");
+	    }}}});
+	    
 		testcontinue2.setText("Continue");
 		testcontinue2.setFont(Font.font("Verdana",15));
 		testcontinue2.setLayoutX(1100);
 		testcontinue2.setLayoutY(650);//
 		testcontinue2.setTextFill(Color.RED);
 		testcontinue2.setOnAction(e -> {Window.setScene(test1listen_screen);Window.setFullScreen(true);test1.getChildren().remove(topic1_txt);test1.getChildren().remove(testrectangle);test1.getChildren().remove(testlogo);test1listen.getChildren().add(0,testrectangle);test1listen.getChildren().add(testlogo);
-		;test1listen.getChildren().add(topic1_txt);topic1_txt.setText("Food: Translate in the box!");test1listen.getChildren().add(coffeewaterburger_txt);
-		test1listen.getChildren().add(COFFEEinput);test1listen.getChildren().add(WATERinput);test1listen.getChildren().add(BURGERinput); 
+		;test1listen.getChildren().add(topic1_txt);topic1_txt.setText("Food: Translate into Spanish in the box!");topic1_txt.setX(250);test1listen.getChildren().add(coffeewaterburger_txt);
+		test1listen.getChildren().add(COFFEEinput);test1listen.getChildren().add(WATERinput);test1listen.getChildren().add(BURGERinput); test1listen.getChildren().add(tri_BTN); 
 		; ;;});
-		
-		Button tri_BTN = new Button();
-		tri_BTN.setText("Check");
-		tri_BTN.setOnAction(e -> {String coffee = COFFEEinput.getText();String water = WATERinput.getText();String burger = BURGERinput.getText();String coffecorrect ="cafe negro";String watercorrect = "agua";String burgercorrect = " hamburguesas";
-		if (coffee.equals(coffecorrect)) {testScore.addAndGet(1);
-	    } else if (water.equals(watercorrect)) {testScore.addAndGet(1);
-	    } else if (burger.equals(burgercorrect)) {testScore.addAndGet(1);
-	    } else {testScore.addAndGet(0);}}); 	
-
 		
 		Button test2button = new Button();
 		test2button.setText("Start Food Tests!");
@@ -530,11 +540,7 @@ public class Main extends Application {
 		BTN_accessibility.setOnAction(e -> {Window.setScene(accessibility); Window.setFullScreen(true);screen_accessibility.getChildren().add(0,baserectangle);screen_accessibility.getChildren().add(BTN_returnhelp);});
 		
 		Text[] texts = new Text[] 
-		{textslider_txt, textbold_txt,invalid_txt,
-				helptext_txt,login_txt,accessibility_txt,
-				username_txt,password_txt, test_txt,
-				testset2test_txt,testset1test_txt, testset1_txt,
-				testset2_txt};
+		{testset2_txt, textslider_txt, textbold_txt, invalid_txt, helptext_txt, login_txt, accessibility_txt, username_txt, password_txt, test_txt, testset1test_txt, testset1_txt, topic1_txt, coffeewaterburger_txt, testset2test_txt, testset2_txt,};
 		
 		boldCheckBox.setOnAction(e -> {
 		    for (Text text : texts) {

@@ -18,7 +18,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 public class Main extends Application {
 	Stage Window;
@@ -43,8 +45,8 @@ public class Main extends Application {
 		Group screen_accessibility = new Group();
 		Group screen_tests = new Group();
 		Group test1 = new Group();
-		Group test1listen = new Group();
-		Group test2 = new Group();
+		Group testtranslate = new Group();
+		Group testlisten = new Group ();
 		Group testresults = new Group();
 		Group screen_help = new Group();
 		Group screen_teacher = new Group();
@@ -52,9 +54,9 @@ public class Main extends Application {
 		Scene accessibility = new Scene(screen_accessibility,2000,2000,Color.rgb(68,114,196));
 		Scene studentScene = new Scene(screen_tests,2000,2000, Color.rgb(68,114,196));
 		Scene teacherScene = new Scene(screen_teacher,2000,2000, Color.rgb(68,114,196));
-		Scene test1_screen = new Scene(test1,2000,2000, Color.rgb(68,114,196));
-		Scene test1listen_screen = new Scene(test1listen,2000,2000, Color.rgb(68,114,196));
-		Scene test2_screen = new Scene(test2,2000,2000, Color.rgb(68,114,196));
+		Scene test_screen = new Scene(test1,2000,2000, Color.rgb(68,114,196));
+		Scene testtranslate_screen = new Scene(testtranslate,2000,2000, Color.rgb(68,114,196));
+		Scene testlisten_screen = new Scene(testlisten,2000,2000, Color.rgb(68,114,196));
 		Scene results_screen = new Scene(testresults,2000,2000, Color.rgb(68,114,196));
 		Scene help = new Scene(screen_help,2000,2000, Color.rgb(68,114,196));
 		Image icon = new Image("logo.jpg");
@@ -64,8 +66,12 @@ public class Main extends Application {
 		AudioClip water_snd = new AudioClip(Paths.get("src/water.wav").toUri().toString());
 		AudioClip coffee_snd = new AudioClip(Paths.get("src/coffee.wav").toUri().toString());
 		
+		Media timervideo = new Media(Paths.get("src/20timer.mp4").toUri().toString());
+		MediaPlayer timerplayer = new MediaPlayer(timervideo);
+		MediaView timer = new MediaView(timerplayer);
+
 		Window.getIcons().add(icon);
-		Window.setTitle("MFL login");
+		Window.setTitle("MFL Application");
 			
 		Image logo = new Image("wolfreton.png");
 		ImageView imageview = new ImageView(logo);
@@ -80,13 +86,13 @@ public class Main extends Application {
 		coffeeview.setY(275);
 		coffeeview.setFitWidth(400);
 		coffeeview.setFitHeight(300);
-		Image burgerimg = new Image("burger.jpg");
+		Image burgerimg = new Image("pepper.png");
 		ImageView burgerview = new ImageView(burgerimg);
 		burgerview.setX(100); 
 		burgerview.setY(275);
 		burgerview.setFitWidth(400);
 		burgerview.setFitHeight(300);
-		Image waterimg = new Image("water.jpg");
+		Image waterimg = new Image("salt.jpg");
 		ImageView waterview = new ImageView(waterimg);
 		waterview.setX(100); 
 		waterview.setY(275);
@@ -106,6 +112,7 @@ public class Main extends Application {
 		baserectangle.setWidth(1100);
 		baserectangle.setHeight(600);
 		baserectangle.setFill(Color.rgb(48, 84, 148));
+		
 		
 		Rectangle testrectangle = new Rectangle();
 		testrectangle.setX(-10);
@@ -213,8 +220,7 @@ public class Main extends Application {
 		Button correct1 = new Button();
 		Button correct2 = new Button();
 		Text topic1_txt = new Text();
-
-		
+				
 		correct.setStyle("-fx-background-color:#305494;");
 		correct.setFont(Font.font("Verdana",25));
 		correct.setTextFill(Color.BLACK);
@@ -230,7 +236,7 @@ public class Main extends Application {
 		correct1.setStyle("-fx-background-color:#305494;");
 		correct1.setFont(Font.font("Verdana",25));
 		correct1.setTextFill(Color.BLACK);
-		correct1.setText("Leche");
+		correct1.setText("sal");
 		correct1.setLayoutX(700); correct1.setLayoutY(300); 
 		correct1.setOnAction (e -> {correct1.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);test1.getChildren().add(testcontinue1);
 		test1.getChildren().remove(correct1);
@@ -242,7 +248,7 @@ public class Main extends Application {
 		correct2.setStyle("-fx-background-color:#305494;");
 		correct2.setFont(Font.font("Verdana",25));
 		correct2.setTextFill(Color.BLACK);
-		correct2.setText("sal y pimienta");
+		correct2.setText("pimienta");
 		correct2.setLayoutX(1000); correct2.setLayoutY(400);
 		correct2.setOnAction (e -> {correct2.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);test1.getChildren().add(testcontinue2);
 		test1.getChildren().remove(correct2);
@@ -291,7 +297,7 @@ public class Main extends Application {
 		incorrect4.setStyle("-fx-background-color:#305494;");
 		incorrect4.setFont(Font.font("Verdana",25));
 		incorrect4.setTextFill(Color.BLACK);
-		incorrect4.setText("lechal");
+		incorrect4.setText("slat");
 		incorrect4.setLayoutX(1000); incorrect4.setLayoutY(300);
 		incorrect4.setOnAction (e -> {incorrect4.setStyle("-fx-background-color:#FF2E2E;"); test1.getChildren().add(testcontinue1);
 		test1.getChildren().remove(correct1);
@@ -304,7 +310,7 @@ public class Main extends Application {
 		incorrect5.setStyle("-fx-background-color:#305494;");
 		incorrect5.setFont(Font.font("Verdana",25));	
 		incorrect5.setTextFill(Color.BLACK);
-		incorrect5.setText("lebrel");
+		incorrect5.setText("salino");
 		incorrect5.setLayoutX(1000);incorrect5.setLayoutY(400);
 		incorrect5.setOnAction (e -> {incorrect5.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue1);
 		test1.getChildren().remove(correct1);
@@ -316,7 +322,7 @@ public class Main extends Application {
 		incorrect6.setStyle("-fx-background-color:#305494;");
 		incorrect6.setFont(Font.font("Verdana",25));	
 		incorrect6.setTextFill(Color.BLACK);
-		incorrect6.setText("leach");
+		incorrect6.setText("salado");
 		incorrect6.setLayoutX(700);incorrect6.setLayoutY(400);
 		incorrect6.setOnAction (e -> {incorrect6.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue1);
 		test1.getChildren().remove(correct1);
@@ -329,7 +335,7 @@ public class Main extends Application {
 		incorrect7.setStyle("-fx-background-color:#305494;");
 		incorrect7.setFont(Font.font("Verdana",25));
 		incorrect7.setTextFill(Color.BLACK);
-		incorrect7.setText("sala de espera");
+		incorrect7.setText("Panama");
 		incorrect7.setLayoutX(1000); incorrect7.setLayoutY(300);
 		incorrect7.setOnAction (e -> {incorrect7.setStyle("-fx-background-color:#FF2E2E;"); test1.getChildren().add(testcontinue2);
 		test1.getChildren().remove(correct2);
@@ -342,7 +348,7 @@ public class Main extends Application {
 		incorrect8.setStyle("-fx-background-color:#305494;");
 		incorrect8.setFont(Font.font("Verdana",25));	
 		incorrect8.setTextFill(Color.BLACK);
-		incorrect8.setText("sal mineral");
+		incorrect8.setText("pera");
 		incorrect8.setLayoutX(700); incorrect8.setLayoutY(300);
 		incorrect8.setOnAction (e -> {incorrect8.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue2);
 		test1.getChildren().remove(correct2);
@@ -354,7 +360,7 @@ public class Main extends Application {
 		incorrect9.setStyle("-fx-background-color:#305494;");
 		incorrect9.setFont(Font.font("Verdana",25));	
 		incorrect9.setTextFill(Color.BLACK);
-		incorrect9.setText("sala de lectura ");
+		incorrect9.setText("pierna");
 		incorrect9.setLayoutX(700);incorrect9.setLayoutY(400);
 		incorrect9.setOnAction (e -> {incorrect9.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue2);
 		test1.getChildren().remove(correct2);
@@ -367,7 +373,7 @@ public class Main extends Application {
 		test1button.setText("Start Food Tests!");
 		test1button.setLayoutX(450);
 		test1button.setLayoutY(300); 
-		test1button.setOnAction ( e -> {Window.setScene(test1_screen); Window.setFullScreen(true);
+		test1button.setOnAction ( e -> {Window.setScene(test_screen); Window.setFullScreen(true);
 		topic1_txt.setText("Food: Multiple Choice");test1.getChildren().add(topic1_txt);test1.getChildren().add(0,testrectangle);
 		test1.getChildren().add(testlogo);test1.getChildren().add(coffeeview);
 		test1.getChildren().add(incorrect1);test1.getChildren().add(incorrect2);test1.getChildren().add(incorrect3);test1.getChildren().add(correct);
@@ -397,48 +403,52 @@ public class Main extends Application {
 		resultsbutton.setLayoutX(1100); resultsbutton.setLayoutY(650);
 		resultsbutton.setText("results");
 		resultsbutton.setFont(Font.font("Verdana",15));
+		
 		TextField COFFEEinput = new TextField ();
 		COFFEEinput.setLayoutX(212);COFFEEinput.setLayoutY(350);
 		COFFEEinput.setFont(Font.font("Verdana",20));
+		
 		TextField WATERinput = new TextField ();
 		WATERinput.setLayoutX(590);WATERinput.setLayoutY(350);
 		WATERinput.setFont(Font.font("Verdana",20));
+		
 		TextField BURGERinput = new TextField ();
 		BURGERinput.setLayoutX(960);BURGERinput.setLayoutY(350);
 		BURGERinput.setFont(Font.font("Verdana",20));
-		String coffee = COFFEEinput.getText();String water = WATERinput.getText();String burger = BURGERinput.getText();
-	    String coffecorrect ="cafe negro";String watercorrect = "agua";String burgercorrect = "hamburguesas"; 
-		resultsbutton.setVisible(false);
+		
+	    String coffecorrect ="Te con limon";String watercorrect = "agua mineral";String burgercorrect = "leche"; 
+	    String coffeelistencorrect ="black coffee";String burgerlistencorrect = "burger";String noodleslistencorrect = "noodles"; 
+
+		
 		Text coffeewaterburger_txt = new Text();
 		Button triNext_BTN = new Button(); 
-		Button tri_BTN = new Button();
-		tri_BTN.setText("Check");
-		tri_BTN.setLayoutX(650); tri_BTN.setLayoutY(490);
-		tri_BTN.setFont(Font.font("Verdana",30));
-		tri_BTN.setOnAction(e -> {test1listen.getChildren().add(triNext_BTN); test1listen.getChildren().add(resultsbutton); 
-		    if (!coffee.equals(coffecorrect) && !water.equals(watercorrect) && !burger.equals(burgercorrect)) {
-		        testScore.addAndGet(0);
-		        test1listen.getChildren().remove(tri_BTN);
-		        COFFEEinput.setStyle("-fx-background-color:#FF2E2E;");
-		        WATERinput.setStyle("-fx-background-color:#FF2E2E;");
-		        BURGERinput.setStyle("-fx-background-color:#FF2E2E;");
+		timer.setX(615);timer.setY(490);
+		timer.setFitHeight(200);
+		timer.setFitWidth(200);
+		timerplayer.setOnEndOfMedia(() -> {
+		    testtranslate.getChildren().add(triNext_BTN); testtranslate.getChildren().remove(timer);
+		    String coffee = COFFEEinput.getText(); String water = WATERinput.getText(); String burger = BURGERinput.getText();
+		    COFFEEinput.setEditable(false);WATERinput.setEditable(false);BURGERinput.setEditable(false);COFFEEinput.setFocusTraversable(false);
+
+		    if (coffee.equals(coffecorrect)) {
+		        COFFEEinput.setStyle("-fx-background-color:#50C878;");
+		        testScore.addAndGet(1);
 		    } else {
-		        test1listen.getChildren().remove(tri_BTN); 
-		        if (!coffee.equals(coffecorrect)) {
-		            COFFEEinput.setStyle("-fx-background-color:#FF2E2E;");
-		        } else {
-		            COFFEEinput.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);
-		        }
-		        if (!water.equals(watercorrect)) {
-		            WATERinput.setStyle("-fx-background-color:#FF2E2E;");
-		        } else {
-		            WATERinput.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);
-		        }
-		        if (!burger.equals(burgercorrect)) {
-		            BURGERinput.setStyle("-fx-background-color:#FF2E2E;");
-		        } else {
-		            BURGERinput.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);
-		        }
+		        COFFEEinput.setStyle("-fx-background-color:#FF2E2E;");
+		    }
+
+		    if (water.equals(watercorrect)) {
+		        WATERinput.setStyle("-fx-background-color:#50C878;");
+		        testScore.addAndGet(1);
+		    } else {
+		        WATERinput.setStyle("-fx-background-color:#FF2E2E;");
+		    }
+
+		    if (burger.equals(burgercorrect)) {
+		        BURGERinput.setStyle("-fx-background-color:#50C878;");
+		        testScore.addAndGet(1);
+		    } else {
+		        BURGERinput.setStyle("-fx-background-color:#FF2E2E;");
 		    }
 		});
 	    Button playburger_BTN = new Button();
@@ -454,12 +464,12 @@ public class Main extends Application {
 		triNext_BTN.setLayoutX(1100); triNext_BTN.setLayoutY(650);
 		triNext_BTN.setText("Continue");
 		triNext_BTN.setFont(Font.font("Verdana",15));
-		triNext_BTN.setOnAction(e -> {  test1listen.getChildren().remove(triNext_BTN); test1listen.getChildren().add(tri_BTN);
+		triNext_BTN.setOnAction(e -> {  Window.setScene(testlisten_screen); testtranslate.getChildren().remove(timer);testlisten.getChildren().add(0,testrectangle);testlisten.getChildren().add(testlogo);
+		
 			WATERinput.clear();COFFEEinput.clear();BURGERinput.clear();
 			topic1_txt.setText("Food: Translate Spanish audio into English!");
 			WATERinput.setStyle (null);COFFEEinput.setStyle (null);BURGERinput.setStyle (null);
-			WATERinput.setLayoutY(400);COFFEEinput.setLayoutY(400);BURGERinput.setLayoutY(400);
-			BURGERinput.setLayoutX(212);COFFEEinput.setLayoutX(960); resultsbutton.setVisible(true);	
+			
 		});
 		
 		testcontinue2.setText("Continue");
@@ -467,27 +477,24 @@ public class Main extends Application {
 		testcontinue2.setLayoutX(1100);
 		testcontinue2.setLayoutY(650);//
 		testcontinue2.setTextFill(Color.RED);
-		testcontinue2.setOnAction(e -> {Window.setScene(test1listen_screen);Window.setFullScreen(true);test1.getChildren().remove(topic1_txt);test1.getChildren().remove(testrectangle);test1.getChildren().remove(testlogo);test1listen.getChildren().add(0,testrectangle);test1listen.getChildren().add(testlogo);
-		;test1listen.getChildren().add(topic1_txt);topic1_txt.setText("Food: Translate into Spanish in the box!");topic1_txt.setX(250);test1listen.getChildren().add(coffeewaterburger_txt);
-		test1listen.getChildren().add(COFFEEinput);test1listen.getChildren().add(WATERinput);test1listen.getChildren().add(BURGERinput); test1listen.getChildren().add(tri_BTN); 
-		; ;;});
+		testcontinue2.setOnAction(e -> {Window.setScene(testtranslate_screen);testtranslate.getChildren().add(timer);timerplayer.play();Window.setFullScreen(true);test1.getChildren().remove(topic1_txt);test1.getChildren().remove(testrectangle);test1.getChildren().remove(testlogo);testtranslate.getChildren().add(0,testrectangle);testtranslate.getChildren().add(testlogo);
+		;testtranslate.getChildren().add(topic1_txt);topic1_txt.setText("Food: Translate into Spanish in the box!");topic1_txt.setX(250);testtranslate.getChildren().add(coffeewaterburger_txt);
+		testtranslate.getChildren().add(COFFEEinput);testtranslate.getChildren().add(WATERinput);testtranslate.getChildren().add(BURGERinput); testtranslate.getChildren().add(timer); 
+		;
+		;;});
 		
 		Button test2button = new Button();
-		test2button.setText("Start Food Tests!");
+		test2button.setText("Start Sport Tests!");
 		test2button.setLayoutX(450);
 		test2button.setLayoutY(400);
-		test2button.setOnAction ( e -> {
-			Window.setScene(test2_screen); Window.setFullScreen(true);
-			test2.getChildren().add(0,testrectangle);test2.getChildren().add(testlogo);test1.getChildren().add(testlogo);
-			
-		});
+
 		topic1_txt.setText("Food");
 		topic1_txt.setX(300);
 		topic1_txt.setY(90);
 		topic1_txt.setFont(Font.font("Verdana",50));	
 		
-		coffeewaterburger_txt.setText("Black Coffee                       Water                          Burger");
-		coffeewaterburger_txt.setX(250);
+		coffeewaterburger_txt.setText("Tea with Lemon		       mineral water			milk");
+		coffeewaterburger_txt.setX(210);
 		coffeewaterburger_txt.setY(300);
 		coffeewaterburger_txt.setFont(Font.font("Verdana",30));
 		
@@ -513,8 +520,23 @@ public class Main extends Application {
 		CheckBox test1CheckBox = new CheckBox();
 		test1CheckBox.setLayoutX(450);
 		test1CheckBox.setLayoutY(255);
-		test1CheckBox.setOnAction ( e ->{ if (test1CheckBox.isSelected()) { testset2test_txt.setY(450); test2CheckBox.setLayoutY(405); screen_tests.getChildren().add(testset1test_txt);testset2_txt.setY(425);test2button.setLayoutY(450);screen_tests.getChildren().add(test1button);;
-	        							} else { screen_tests.getChildren().remove(testset1test_txt);testset2test_txt.setY(400);test2CheckBox.setLayoutY(355);testset2_txt.setY(375);screen_tests.getChildren().remove(test1button);test2button.setLayoutY(400);}});
+		test1CheckBox.setOnAction ( e ->{ if (test1CheckBox.isSelected()) { testset2test_txt.setTranslateY(50); test2CheckBox.setTranslateY(50); screen_tests.getChildren().add(testset1test_txt);testset2_txt.setTranslateY(50);test2button.setLayoutY(450);screen_tests.getChildren().add(test1button);;
+	        							} else { screen_tests.getChildren().remove(testset1test_txt);testset2test_txt.setTranslateY(50);;test2CheckBox.setTranslateY(-50);testset2_txt.setTranslateY(-50);screen_tests.getChildren().remove(test1button);test2button.setTranslateY(-50);}});
+		
+		
+		TextField HPinput = new TextField ();
+		HPinput.setLayoutX(750);
+		HPinput.setLayoutY(350);
+		HPinput.setFont(Font.font("Verdana",20));
+		HPinput.setPromptText("Enter Name For Help");
+		HPinput.setFocusTraversable(false);
+		
+		Button BTN_HPinput = new Button ();
+		BTN_HPinput.setText("Submit Name");
+		BTN_HPinput.setLayoutX(800);
+		BTN_HPinput.setLayoutY(400);
+		BTN_HPinput.setFont(Font.font("Verdana",20));
+		BTN_HPinput.setOnAction(e -> {HPinput.clear();screen_help.getChildren().add(helptext_txt);});
 		
 		TextField UNinput = new TextField ();
 		UNinput.setLayoutX(550);
@@ -568,7 +590,7 @@ public class Main extends Application {
 		BTN_help.setOnAction(e -> {Window.setScene(help); Window.setFullScreen(true);screen_help.getChildren().add(0,baserectangle);screen_accessibility.getChildren().remove(BTN_returnhelp);screen_help.getChildren().add(BTN_returnhelp);});
 		
 		ImageView helplogo = new ImageView(logo);
-		helplogo.setX(550);
+		helplogo.setX(300);
 		helplogo.setY(250);
 		helplogo.setFitWidth(300);
 		helplogo.setFitHeight(300);
@@ -607,7 +629,6 @@ public class Main extends Application {
 			screen_login.getChildren().add(BTN_quit);
 			screen_login.getChildren().add(playburger_BTN);
 			screen_login.getChildren().add(playwater_BTN);
-			screen_login.getChildren().add(playcoffee_BTN);
 			//student test screen  
 			screen_tests.getChildren().add(testset1_txt);
 			screen_tests.getChildren().add(testset2_txt);
@@ -617,9 +638,10 @@ public class Main extends Application {
 			
 			//teacher test screen
 
-			//help screen
-			screen_help.getChildren().add(helptext_txt);
+			//help screen 
 			screen_help.getChildren().add(helplogo);
+			screen_help.getChildren().add(HPinput);
+			screen_help.getChildren().add(BTN_HPinput);
 			//accessibility screen 
 			screen_accessibility.getChildren().add(accessibility_txt);
 			screen_accessibility.getChildren().add(textSizeSlider);

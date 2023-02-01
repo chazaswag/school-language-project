@@ -1,26 +1,23 @@
 package application;
 import java.nio.file.Paths;
-import java.util.concurrent.atomic.AtomicInteger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.AudioClip;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 
 public class Main extends Application {
 	Stage Window;
@@ -37,373 +34,229 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primarystage) throws Exception {
 		
+		Images images = new Images();
+		Audio audio = new Audio();
+		Video video = new Video();
+		Groups groups = new Groups();
+		Score score = new Score();
+		multiplechoice choice = new multiplechoice();
+		
 		Window = primarystage;
 		Window.setX(0);
 		Window.setY(0);
 		Window.initStyle(StageStyle.UNDECORATED);
-		Group screen_login = new Group();
-		Group screen_accessibility = new Group();
-		Group screen_tests = new Group();
-		Group test1 = new Group();
-		Group testtranslate = new Group();
-		Group testlisten = new Group ();
-		Group testresults = new Group();
-		Group screen_help = new Group();
-		Group screen_teacher = new Group();
-		Scene loginscreen = new Scene(screen_login,2000,2000,Color.rgb(68,114,196));
-		Scene accessibility = new Scene(screen_accessibility,2000,2000,Color.rgb(68,114,196));
-		Scene studentScene = new Scene(screen_tests,2000,2000, Color.rgb(68,114,196));
-		Scene teacherScene = new Scene(screen_teacher,2000,2000, Color.rgb(68,114,196));
-		Scene test_screen = new Scene(test1,2000,2000, Color.rgb(68,114,196));
-		Scene testtranslate_screen = new Scene(testtranslate,2000,2000, Color.rgb(68,114,196));
-		Scene testlisten_screen = new Scene(testlisten,2000,2000, Color.rgb(68,114,196));
-		Scene results_screen = new Scene(testresults,2000,2000, Color.rgb(68,114,196));
-		Scene help = new Scene(screen_help,2000,2000, Color.rgb(68,114,196));
-		Image icon = new Image("logo.jpg");
-		AtomicInteger testScore = new AtomicInteger();
+		Scene loginscreen = new Scene(groups.screen_login,2000,2000,Color.rgb(68,114,196));
+		Scene accessibility = new Scene(groups.screen_accessibility,2000,2000,Color.rgb(68,114,196));
+		Scene studentScene = new Scene(groups.screen_tests,2000,2000, Color.rgb(68,114,196));
+		Scene teacherScene = new Scene(groups.screen_teacher,2000,2000, Color.rgb(68,114,196));
+		Scene test_screen = new Scene(groups.test1,2000,2000, Color.rgb(68,114,196));
+		Scene testtranslate_screen = new Scene(groups.testtranslate,2000,2000, Color.rgb(68,114,196));
+		Scene testlisten_screen = new Scene(groups.screen_testlisten,2000,2000, Color.rgb(68,114,196));
+		Scene results_screen = new Scene(groups.testresults,2000,2000, Color.rgb(68,114,196));
+		Scene help = new Scene(groups.screen_help,2000,2000, Color.rgb(68,114,196));
+		Window.setTitle("MFL Application"); Window.show();Window.setScene(loginscreen);Window.setFullScreenExitHint("");Window.setFullScreen(true);
 		
-		AudioClip burger_snd = new AudioClip(Paths.get("src/burger.wav").toUri().toString());
-		AudioClip water_snd = new AudioClip(Paths.get("src/water.wav").toUri().toString());
-		AudioClip coffee_snd = new AudioClip(Paths.get("src/coffee.wav").toUri().toString());
+													//media importing. sound images and stuff
 		
-		Media timervideo = new Media(Paths.get("src/20timer.mp4").toUri().toString());
-		MediaPlayer timerplayer = new MediaPlayer(timervideo);
-		MediaView timer = new MediaView(timerplayer);
+		Image icon = new Image(Paths.get("src/img/icons/logo.jpg").toUri().toString()); Window.getIcons().add(icon);
+		Image logo = new Image(Paths.get("src/img/icons/wolfretonlogo.png").toUri().toString());
+		ImageView logoviewer = new ImageView(logo);
+		logoviewer.setX(150);logoviewer.setY(125);
+		logoviewer.setFitWidth(100);logoviewer.setFitHeight(100);
+		Image settings = new Image(Paths.get("src/img/icons/cog.png").toUri().toString());
+		ImageView settingsviewer = new ImageView(settings);
+		settingsviewer.setX(150);settingsviewer.setY(125);
+		settingsviewer.setFitWidth(100);settingsviewer.setFitHeight(100);
 
-		Window.getIcons().add(icon);
-		Window.setTitle("MFL Application");
-			
-		Image logo = new Image("wolfreton.png");
-		ImageView imageview = new ImageView(logo);
-		imageview.setX(150);
-		imageview.setY(125);
-		imageview.setFitWidth(100);
-		imageview.setFitHeight(100);
-		
-		Image coffeeimg = new Image("sugar.jpg");
-		ImageView coffeeview = new ImageView(coffeeimg);
-		coffeeview.setX(100); 
-		coffeeview.setY(275);
-		coffeeview.setFitWidth(400);
-		coffeeview.setFitHeight(300);
-		Image burgerimg = new Image("pepper.png");
-		ImageView burgerview = new ImageView(burgerimg);
-		burgerview.setX(100); 
-		burgerview.setY(275);
-		burgerview.setFitWidth(400);
-		burgerview.setFitHeight(300);
-		Image waterimg = new Image("salt.jpg");
-		ImageView waterview = new ImageView(waterimg);
-		waterview.setX(100); 
-		waterview.setY(275);
-		waterview.setFitWidth(400);
-		waterview.setFitHeight(300);
-		
-		Image settings = new Image("cog.png");
-		ImageView imageview1 = new ImageView(settings);
-		imageview1.setX(150);
-		imageview1.setY(125);
-		imageview1.setFitWidth(100);
-		imageview1.setFitHeight(100);
-		
 		Rectangle baserectangle = new Rectangle();
-		baserectangle.setX(125);
-		baserectangle.setY(100);
-		baserectangle.setWidth(1100);
-		baserectangle.setHeight(600);
+		baserectangle.setX(125);baserectangle.setY(100);
+		baserectangle.setWidth(1100);baserectangle.setHeight(600);
 		baserectangle.setFill(Color.rgb(48, 84, 148));
 		
-		
 		Rectangle testrectangle = new Rectangle();
-		testrectangle.setX(-10);
-		testrectangle.setY(0);
-		testrectangle.setWidth(2000);
-		testrectangle.setHeight(150);
+		testrectangle.setX(-10);testrectangle.setY(0);
+		testrectangle.setWidth(2000);testrectangle.setHeight(150);
 		testrectangle.setFill(Color.rgb(48, 84, 148));
 		
 		ImageView testlogo = new ImageView(logo);
-		testlogo.setX(40);
-		testlogo.setY(10);
-		testlogo.setFitWidth(125);
-		testlogo.setFitHeight(125);
+		testlogo.setX(40);testlogo.setY(10);
+		testlogo.setFitWidth(125);testlogo.setFitHeight(125);
 		
 		Slider textSizeSlider = new Slider();
-		textSizeSlider.setLayoutX(680);
-		textSizeSlider.setLayoutY(297);
-		textSizeSlider.setMin(1);
-		textSizeSlider.setMax(3);
-		textSizeSlider.setValue(1);
+		textSizeSlider.setLayoutX(680);textSizeSlider.setLayoutY(297);
+		textSizeSlider.setMin(1);textSizeSlider.setMax(3);textSizeSlider.setValue(1);
 		
 		CheckBox boldCheckBox = new CheckBox();
-		boldCheckBox.setLayoutX(680);
-		boldCheckBox.setLayoutY(350);
+		boldCheckBox.setLayoutX(680);boldCheckBox.setLayoutY(340);
+		
+		Label subtitle = new Label();
+		subtitle.setTextFill(Color.WHITE);
+		subtitle.setFont(Font.font("Verdana",30));
+		subtitle.setLayoutY(410); subtitle.setLayoutX(4000);
+		subtitle.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), null, null)));
+		subtitle.setVisible(false);
+		
+		Text subtitleBox_txt = new Text();
+		subtitleBox_txt.setText("Subtitles :");
+		subtitleBox_txt.setX(481);subtitleBox_txt.setY(410);
+		subtitleBox_txt.setFont(Font.font("Verdana",30));
+		
+		CheckBox subtitlesBool = new CheckBox();
+		subtitlesBool.setLayoutX(680);subtitlesBool.setLayoutY(390);
+		subtitlesBool.setOnAction ( e ->{ if (subtitlesBool.isSelected()) {  subtitle.setVisible(true); ;
+		} else {subtitle.setVisible(false);}});
 		
 		Text textslider_txt = new Text();
 		textslider_txt.setText("Text Size :");
-		textslider_txt.setX(480);
-		textslider_txt.setY(310);
+		textslider_txt.setX(480);textslider_txt.setY(310);
 		textslider_txt.setFont(Font.font("Verdana",30));
 		
 		Text textbold_txt = new Text();
 		textbold_txt.setText("Bold :");
-		textbold_txt.setX(481);
-		textbold_txt.setY(360);
+		textbold_txt.setX(481);textbold_txt.setY(360);
 		textbold_txt.setFont(Font.font("Verdana",30));
 
 		Text invalid_txt = new Text();
 		invalid_txt.setText("Wrong Username and or Password");
-		invalid_txt.setX(550);
-		invalid_txt.setY(675);
+		invalid_txt.setX(550);invalid_txt.setY(675);
 		invalid_txt.setFont(Font.font("Verdana",15));
 		
 		Text helptext_txt = new Text();
 		helptext_txt.setText("Your teacher has been notified");
-		helptext_txt.setX(475);
-		helptext_txt.setY(200);
+		helptext_txt.setX(475);helptext_txt.setY(200);
 		helptext_txt.setFont(Font.font("Verdana",30));
 		
 		Text login_txt = new Text();
 		login_txt.setText("Log-In");
-		login_txt.setX(625);
-		login_txt.setY(200);
+		login_txt.setX(625);login_txt.setY(200);
 		login_txt.setFont(Font.font("Verdana",30));
 		
 		Text accessibility_txt = new Text();
 		accessibility_txt.setText("Settings & Accessibility");
-		accessibility_txt.setX(500);
-		accessibility_txt.setY(200);
+		accessibility_txt.setX(500);accessibility_txt.setY(200);
 		accessibility_txt.setFont(Font.font("Verdana",30));
 		
 		Text username_txt = new Text();
 		username_txt.setText("username");
-		username_txt.setX(600);
-		username_txt.setY(300);
+		username_txt.setX(600);username_txt.setY(300);
 		username_txt.setFont(Font.font("Verdana",30));
+
 		
 		Text password_txt = new Text();
 		password_txt.setText("password");
-		password_txt.setX(600);
-		password_txt.setY(450);
+		password_txt.setX(600);password_txt.setY(450);
 		password_txt.setFont(Font.font("Verdana",30));
 		
 		Text test_txt = new Text();
 		test_txt.setText("Tests");
-		test_txt.setX(650);
-		test_txt.setY(150);
+		test_txt.setX(650);test_txt.setY(150);
 		test_txt.setFont(Font.font("Verdana",30));
 		
 		Text testset1test_txt = new Text();
 		testset1test_txt.setText("Food test 1\n"+ "Food test 2\n"+ "Food test 3| due 25/12/22");
-		testset1test_txt.setX(250);
-		testset1test_txt.setY(300);
+		testset1test_txt.setX(250);testset1test_txt.setY(300);
 		testset1test_txt.setFont(Font.font("Verdana",20));	
 		
 		Text testset1_txt = new Text();
 		testset1_txt.setText("Food tests");
-		testset1_txt.setX(250);
-		testset1_txt.setY(275);
+		testset1_txt.setX(250);testset1_txt.setY(275);
 		testset1_txt.setFont(Font.font("Verdana",30));	
 		
-		Button testcontinue = new Button();
-		Button testcontinue1 = new Button();
-		Button testcontinue2 = new Button();
-		Button incorrect1 = new Button();
-		Button incorrect2 = new Button();
-		Button incorrect3 = new Button();
-		Button incorrect4 = new Button();
-		Button incorrect5 = new Button();
-		Button incorrect6 = new Button();		
-		Button incorrect7 = new Button();
-		Button incorrect8 = new Button();
-		Button incorrect9 = new Button();
-		Button correct = new Button();
-		Button correct1 = new Button();
-		Button correct2 = new Button();
 		Text topic1_txt = new Text();
-				
-		correct.setStyle("-fx-background-color:#305494;");
-		correct.setFont(Font.font("Verdana",25));
-		correct.setTextFill(Color.BLACK);
-		correct.setText("azúcar");
-		correct.setLayoutX(1000);correct.setLayoutY(300);
-		correct.setOnAction (e -> {correct.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);test1.getChildren().add(testcontinue);
-		test1.getChildren().remove(correct);
-		test1.getChildren().remove(incorrect1);
-		test1.getChildren().remove(incorrect2);
-		test1.getChildren().remove(incorrect3);
-		test1.getChildren().add(correct);});
+		Button triNext_BTN = new Button(); 
 		
-		correct1.setStyle("-fx-background-color:#305494;");
-		correct1.setFont(Font.font("Verdana",25));
-		correct1.setTextFill(Color.BLACK);
-		correct1.setText("sal");
-		correct1.setLayoutX(700); correct1.setLayoutY(300); 
-		correct1.setOnAction (e -> {correct1.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);test1.getChildren().add(testcontinue1);
-		test1.getChildren().remove(correct1);
-		test1.getChildren().remove(incorrect4);
-		test1.getChildren().remove(incorrect5);
-		test1.getChildren().remove(incorrect6);
-		test1.getChildren().add(correct1);});
+		TextField UNinput = new TextField ();
+		UNinput.setLayoutX(550);UNinput.setLayoutY(350);
+		UNinput.setFont(Font.font("Verdana",20));
+
+		PasswordField PWinput = new PasswordField ();
+		PWinput.setLayoutX(550);PWinput.setLayoutY(500);
+		PWinput.setFont(Font.font("Verdana",20));
 		
-		correct2.setStyle("-fx-background-color:#305494;");
-		correct2.setFont(Font.font("Verdana",25));
-		correct2.setTextFill(Color.BLACK);
-		correct2.setText("pimienta");
-		correct2.setLayoutX(1000); correct2.setLayoutY(400);
-		correct2.setOnAction (e -> {correct2.setStyle("-fx-background-color:#50C878;");testScore.addAndGet(1);test1.getChildren().add(testcontinue2);
-		test1.getChildren().remove(correct2);
-		test1.getChildren().remove(incorrect7);
-		test1.getChildren().remove(incorrect8);
-		test1.getChildren().remove(incorrect9);
-		test1.getChildren().add(correct2);});
-		
-		incorrect1.setStyle("-fx-background-color:#305494;");
-		incorrect1.setFont(Font.font("Verdana",25));
-		incorrect1.setTextFill(Color.BLACK);
-		incorrect1.setText("estucar");
-		incorrect1.setLayoutX(700);incorrect1.setLayoutY(300);
-		incorrect1.setOnAction (e -> {incorrect1.setStyle("-fx-background-color:#FF2E2E;"); test1.getChildren().add(testcontinue);
-		test1.getChildren().remove(correct);
-		test1.getChildren().remove(incorrect1);
-		test1.getChildren().remove(incorrect2);
-		test1.getChildren().remove(incorrect3);
-		test1.getChildren().add(incorrect1);});
 
 		
-		incorrect2.setStyle("-fx-background-color:#305494;");
-		incorrect2.setFont(Font.font("Verdana",25));	
-		incorrect2.setTextFill(Color.BLACK);
-		incorrect2.setText("embabucar");
-		incorrect2.setLayoutX(1000);incorrect2.setLayoutY(400);
-		incorrect2.setOnAction (e -> {incorrect2.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue);
-		test1.getChildren().remove(correct);
-		test1.getChildren().remove(incorrect1);
-		test1.getChildren().remove(incorrect2);
-		test1.getChildren().remove(incorrect3);
-		test1.getChildren().add(incorrect2);});
-	
-		incorrect3.setStyle("-fx-background-color:#305494;");
-		incorrect3.setFont(Font.font("Verdana",25));	
-		incorrect3.setTextFill(Color.BLACK);
-		incorrect3.setText("zabucar");
-		incorrect3.setLayoutX(700);incorrect3.setLayoutY(400);
-		incorrect3.setOnAction (e -> {incorrect3.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue);
-		test1.getChildren().remove(correct);
-		test1.getChildren().remove(incorrect1);
-		test1.getChildren().remove(incorrect2);
-		test1.getChildren().remove(incorrect3);
-		test1.getChildren().add(incorrect3);});
 
-		incorrect4.setStyle("-fx-background-color:#305494;");
-		incorrect4.setFont(Font.font("Verdana",25));
-		incorrect4.setTextFill(Color.BLACK);
-		incorrect4.setText("slat");
-		incorrect4.setLayoutX(1000); incorrect4.setLayoutY(300);
-		incorrect4.setOnAction (e -> {incorrect4.setStyle("-fx-background-color:#FF2E2E;"); test1.getChildren().add(testcontinue1);
-		test1.getChildren().remove(correct1);
-		test1.getChildren().remove(incorrect4);
-		test1.getChildren().remove(incorrect5);
-		test1.getChildren().remove(incorrect6);
-		test1.getChildren().add(incorrect4);});
-
-		
-		incorrect5.setStyle("-fx-background-color:#305494;");
-		incorrect5.setFont(Font.font("Verdana",25));	
-		incorrect5.setTextFill(Color.BLACK);
-		incorrect5.setText("salino");
-		incorrect5.setLayoutX(1000);incorrect5.setLayoutY(400);
-		incorrect5.setOnAction (e -> {incorrect5.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue1);
-		test1.getChildren().remove(correct1);
-		test1.getChildren().remove(incorrect4);
-		test1.getChildren().remove(incorrect5);
-		test1.getChildren().remove(incorrect6);
-		test1.getChildren().add(incorrect5);});
-	
-		incorrect6.setStyle("-fx-background-color:#305494;");
-		incorrect6.setFont(Font.font("Verdana",25));	
-		incorrect6.setTextFill(Color.BLACK);
-		incorrect6.setText("salado");
-		incorrect6.setLayoutX(700);incorrect6.setLayoutY(400);
-		incorrect6.setOnAction (e -> {incorrect6.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue1);
-		test1.getChildren().remove(correct1);
-		test1.getChildren().remove(incorrect4);
-		test1.getChildren().remove(incorrect5);
-		test1.getChildren().remove(incorrect6);
-		test1.getChildren().add(incorrect6);});
-		
-		
-		incorrect7.setStyle("-fx-background-color:#305494;");
-		incorrect7.setFont(Font.font("Verdana",25));
-		incorrect7.setTextFill(Color.BLACK);
-		incorrect7.setText("Panama");
-		incorrect7.setLayoutX(1000); incorrect7.setLayoutY(300);
-		incorrect7.setOnAction (e -> {incorrect7.setStyle("-fx-background-color:#FF2E2E;"); test1.getChildren().add(testcontinue2);
-		test1.getChildren().remove(correct2);
-		test1.getChildren().remove(incorrect7);
-		test1.getChildren().remove(incorrect8);
-		test1.getChildren().remove(incorrect9);
-		test1.getChildren().add(incorrect7);});
-
-		
-		incorrect8.setStyle("-fx-background-color:#305494;");
-		incorrect8.setFont(Font.font("Verdana",25));	
-		incorrect8.setTextFill(Color.BLACK);
-		incorrect8.setText("pera");
-		incorrect8.setLayoutX(700); incorrect8.setLayoutY(300);
-		incorrect8.setOnAction (e -> {incorrect8.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue2);
-		test1.getChildren().remove(correct2);
-		test1.getChildren().remove(incorrect7);
-		test1.getChildren().remove(incorrect8);
-		test1.getChildren().remove(incorrect9);
-		test1.getChildren().add(incorrect8);});
-	
-		incorrect9.setStyle("-fx-background-color:#305494;");
-		incorrect9.setFont(Font.font("Verdana",25));	
-		incorrect9.setTextFill(Color.BLACK);
-		incorrect9.setText("pierna");
-		incorrect9.setLayoutX(700);incorrect9.setLayoutY(400);
-		incorrect9.setOnAction (e -> {incorrect9.setStyle("-fx-background-color:#FF2E2E;");test1.getChildren().add(testcontinue2);
-		test1.getChildren().remove(correct2);
-		test1.getChildren().remove(incorrect7);
-		test1.getChildren().remove(incorrect8);
-		test1.getChildren().remove(incorrect9);
-		test1.getChildren().add(incorrect9);});
 		
 		Button test1button = new Button();
 		test1button.setText("Start Food Tests!");
 		test1button.setLayoutX(450);
 		test1button.setLayoutY(300); 
 		test1button.setOnAction ( e -> {Window.setScene(test_screen); Window.setFullScreen(true);
-		topic1_txt.setText("Food: Multiple Choice");test1.getChildren().add(topic1_txt);test1.getChildren().add(0,testrectangle);
-		test1.getChildren().add(testlogo);test1.getChildren().add(coffeeview);
-		test1.getChildren().add(incorrect1);test1.getChildren().add(incorrect2);test1.getChildren().add(incorrect3);test1.getChildren().add(correct);
+		topic1_txt.setText("Food: Multiple Choice");groups.test1.getChildren().add(topic1_txt);groups.test1.getChildren().add(0,testrectangle);
+		groups.test1.getChildren().add(testlogo);groups.test1.getChildren().add(images.coffeeviewer);
+		groups.test1.getChildren().add(choice.incorrect1);groups.test1.getChildren().add(choice.incorrect2);groups.test1.getChildren().add(choice.incorrect3);groups.test1.getChildren().add(choice.correct);
 		});
 
-		testcontinue.setText("Continue");
-		testcontinue.setFont(Font.font("Verdana",15));
-		testcontinue.setLayoutX(1100);
-		testcontinue.setLayoutY(650);
-		testcontinue.setTextFill(Color.RED);
-		testcontinue.setOnAction(e -> {
-		test1.getChildren().remove(coffeeview); test1.getChildren().add(waterview); test1.getChildren().remove(testcontinue);
-		test1.getChildren().remove(correct);test1.getChildren().remove(incorrect1);test1.getChildren().remove(incorrect2);test1.getChildren().remove(incorrect3);
-		test1.getChildren().add(correct1);test1.getChildren().add(incorrect4);test1.getChildren().add(incorrect5);test1.getChildren().add(incorrect6);;});
 		
-		testcontinue1.setText("Continue");
-		testcontinue1.setFont(Font.font("Verdana",15));
-		testcontinue1.setLayoutX(1100);
-		testcontinue1.setLayoutY(650);
-		testcontinue1.setTextFill(Color.RED);
-		testcontinue1.setOnAction(e -> {
-		test1.getChildren().remove(waterview); test1.getChildren().add(burgerview); test1.getChildren().remove(testcontinue1);
-		test1.getChildren().remove(correct1);test1.getChildren().remove(incorrect4);test1.getChildren().remove(incorrect5);test1.getChildren().remove(incorrect6);
-		test1.getChildren().add(correct2);test1.getChildren().add(incorrect7);test1.getChildren().add(incorrect8);test1.getChildren().add(incorrect9);;});
-			
+		Text score_txt = new Text();
+		score_txt.setText("Your test score was: " + score.testScore + " / 9");
+		score_txt.setX(700);score_txt.setY(200);
+		score_txt.setFont(Font.font("Verdana",30));
+		
+		Text name_txt = new Text();
+		name_txt.setText("hi");
+		name_txt.setX(200);name_txt.setY(200);
+		name_txt.setFont(Font.font("Verdana",30));
+		
+		ImageView resultslogo = new ImageView(logo);
+		resultslogo.setX(1075);
+		resultslogo.setY(125);
+		resultslogo.setFitWidth(100);
+		resultslogo.setFitHeight(100);
+		
 		Button resultsbutton = new Button();
 		resultsbutton.setLayoutX(1100); resultsbutton.setLayoutY(650);
 		resultsbutton.setText("results");
 		resultsbutton.setFont(Font.font("Verdana",15));
+		resultsbutton.setOnAction(e -> {
+			Window.setScene(results_screen);
+			groups.testresults.getChildren().add(0,baserectangle);
+			score_txt.setText("Your score is: " + score.testScore.get() + " / 9");
+			groups.testresults.getChildren().add(resultslogo); 
+			String feedback1 = new String("");
+			String feedback2 = new String("");
+			if (score.testScore.get() <= 3)
+			{
+				feedback1 = ("You had a good go at all of them. You tried on minerals, drinks and food.");
+				feedback2 = ("You need to improve on all the subjects covered as you failed to answer the majority.");
+			}
+			else if (score.testScore.get() <= 6)
+			{
+				feedback1 = ("You did great on all the subjects covered. You did well on minerals, drinks and food.");
+				feedback2 = ("You need to revise specific topics but generally not many of improvements, keep working hard.");
+			}
+			else if (score.testScore.get() <= 9)
+			{
+				feedback1 = ("You did awesome and got full marks. You really know minerals, drinks and food.");
+				feedback2 = ("Try and iron out the small mistakes.");
+			}
+
+			Text WWW = new Text();
+			WWW.setY(400); WWW.setX(200);
+			Text TIF = new Text();
+			TIF.setY(550); TIF.setX(200);
+			WWW.setText("What Went Well \n Here is your feedback; " + feedback1 + "\n Well done.");
+			TIF.setText("To Be Improved Further\n"+feedback2 + " Nice try.");
+			groups.testresults.getChildren().add(WWW);
+			groups.testresults.getChildren().add(TIF);
+			WWW.setFont(Font.font("Verdana",18));
+			TIF.setFont(Font.font("Verdana",18));
+		});
 		
+		Button readaloud1_BTN = new Button();
+		readaloud1_BTN.setGraphic(images.readaloud_viewer);
+		readaloud1_BTN.setLayoutX(180);readaloud1_BTN.setLayoutY(30);
+		readaloud1_BTN.setOnAction(e -> {audio.readaloud1.play();});
+		Button readaloud2_BTN = new Button();
+		readaloud2_BTN.setGraphic(images.readaloud_viewer);
+		readaloud2_BTN.setLayoutX(180);readaloud2_BTN.setLayoutY(30);
+		readaloud2_BTN.setOnAction(e -> {audio.readaloud2.play();});
+		Button readaloud3_BTN = new Button();
+		readaloud3_BTN.setGraphic(images.readaloud_viewer);
+		readaloud3_BTN.setLayoutX(180);readaloud3_BTN.setLayoutY(30);
+		readaloud3_BTN.setOnAction(e -> {audio.readaloud3.play();});
+		
+
 		TextField COFFEEinput = new TextField ();
 		COFFEEinput.setLayoutX(212);COFFEEinput.setLayoutY(350);
 		COFFEEinput.setFont(Font.font("Verdana",20));
@@ -419,67 +272,117 @@ public class Main extends Application {
 	    String coffecorrect ="Te con limon";String watercorrect = "agua mineral";String burgercorrect = "leche"; 
 	    String coffeelistencorrect ="black coffee";String burgerlistencorrect = "burger";String noodleslistencorrect = "noodles"; 
 
-		
-		Text coffeewaterburger_txt = new Text();
-		Button triNext_BTN = new Button(); 
-		timer.setX(615);timer.setY(490);
-		timer.setFitHeight(200);
-		timer.setFitWidth(200);
-		timerplayer.setOnEndOfMedia(() -> {
-		    testtranslate.getChildren().add(triNext_BTN); testtranslate.getChildren().remove(timer);
-		    String coffee = COFFEEinput.getText(); String water = WATERinput.getText(); String burger = BURGERinput.getText();
+	    Button listenclear_BTN = new Button();
+	    listenclear_BTN.setText("Check Your Answers");
+	    listenclear_BTN.setFont(Font.font("Verdana",30));
+	    listenclear_BTN.setLayoutX(540); listenclear_BTN.setLayoutY(600);
+	    listenclear_BTN.setOnAction(e -> {
+	    	groups.screen_testlisten.getChildren().remove(listenclear_BTN); groups.screen_testlisten.getChildren().add(resultsbutton);
+	    	String coffee = COFFEEinput.getText(); String water = WATERinput.getText(); String burger = BURGERinput.getText();
 		    COFFEEinput.setEditable(false);WATERinput.setEditable(false);BURGERinput.setEditable(false);COFFEEinput.setFocusTraversable(false);
 
-		    if (coffee.equals(coffecorrect)) {
+		    if (coffee.equalsIgnoreCase(burgerlistencorrect)) {
 		        COFFEEinput.setStyle("-fx-background-color:#50C878;");
-		        testScore.addAndGet(1);
+		        score.testScore.getAndAdd(1);
 		    } else {
 		        COFFEEinput.setStyle("-fx-background-color:#FF2E2E;");
 		    }
 
-		    if (water.equals(watercorrect)) {
+		    if (water.equalsIgnoreCase(noodleslistencorrect)) {
 		        WATERinput.setStyle("-fx-background-color:#50C878;");
-		        testScore.addAndGet(1);
+		        score.testScore.getAndAdd(1);
 		    } else {
 		        WATERinput.setStyle("-fx-background-color:#FF2E2E;");
 		    }
 
-		    if (burger.equals(burgercorrect)) {
+		    if (burger.equalsIgnoreCase(coffeelistencorrect)) {
 		        BURGERinput.setStyle("-fx-background-color:#50C878;");
-		        testScore.addAndGet(1);
+		        score.testScore.getAndAdd(1);
+		    } else {
+		        BURGERinput.setStyle("-fx-background-color:#FF2E2E;");
+		    }
+	    	});
+	    
+		Text coffeewaterburger_txt = new Text();
+		video.timer.setX(615);video.timer.setY(490);
+		video.timer.setFitHeight(200);
+		video.timer.setFitWidth(200);
+		video.timerplayer.setOnEndOfMedia(() -> {
+		  groups.testtranslate.getChildren().add(triNext_BTN); groups.testtranslate.getChildren().remove(video.timer);
+		    String coffee = COFFEEinput.getText(); String water = WATERinput.getText(); String burger = BURGERinput.getText();
+		    COFFEEinput.setEditable(false);WATERinput.setEditable(false);BURGERinput.setEditable(false);COFFEEinput.setFocusTraversable(false);
+
+		    if (coffee.equalsIgnoreCase(coffecorrect)) {
+		        COFFEEinput.setStyle("-fx-background-color:#50C878;");
+		        score.testScore.getAndAdd(1);
+		    } else {
+		        COFFEEinput.setStyle("-fx-background-color:#FF2E2E;");
+		    }
+
+		    if (water.equalsIgnoreCase(watercorrect)) {
+		        WATERinput.setStyle("-fx-background-color:#50C878;");
+		        score.testScore.getAndAdd(1);
+		    } else {
+		        WATERinput.setStyle("-fx-background-color:#FF2E2E;");
+		    }
+
+		    if (burger.equalsIgnoreCase(burgercorrect)) {
+		        BURGERinput.setStyle("-fx-background-color:#50C878;");
+		        score.testScore.getAndAdd(1);
 		    } else {
 		        BURGERinput.setStyle("-fx-background-color:#FF2E2E;");
 		    }
 		});
 	    Button playburger_BTN = new Button();
-	    playburger_BTN.setLayoutY(0);
-	    playburger_BTN.setOnAction(e -> {burger_snd.play();});
+	    playburger_BTN.setLayoutX(237);playburger_BTN.setLayoutY(350);
+	    playburger_BTN.setText("Sound 1 ▶");
+	    playburger_BTN.setOnAction(e -> {audio.burger_snd.play();
+	    subtitle.setLayoutX(210);
+	    subtitle.setText("\"hamburguesa\"");
+	    });
+	    playburger_BTN.setFont(Font.font("Verdana",30));
 	    Button playwater_BTN = new Button();
-	    playwater_BTN.setLayoutY(100);
-	    playwater_BTN.setOnAction(e -> {water_snd.play();});
+	    playwater_BTN.setLayoutX(615);playwater_BTN.setLayoutY(350);
+	    playwater_BTN.setText("Sound 2 ▶");
+	    playwater_BTN.setOnAction(e -> {audio.water_snd.play();
+	    subtitle.setLayoutX(660);
+	    subtitle.setText("\"fideos\""); 
+	    });
+	    playwater_BTN.setFont(Font.font("Verdana",30));
 	    Button playcoffee_BTN = new Button();
-	    playcoffee_BTN.setLayoutY(200);
-	    playcoffee_BTN.setOnAction(e -> {coffee_snd.play();});
+	    playcoffee_BTN.setLayoutX(985);playcoffee_BTN.setLayoutY(350);
+	    playcoffee_BTN.setText("Sound 3 ▶");
+	    playcoffee_BTN.setOnAction(e -> {
+	    subtitle.setLayoutX(985);
+	    subtitle.setText("\"cafe negro\"");
+	    audio.coffee_snd.play(); 
+	    });
+	    
+	    playcoffee_BTN.setFont(Font.font("Verdana",30));
 	    
 		triNext_BTN.setLayoutX(1100); triNext_BTN.setLayoutY(650);
 		triNext_BTN.setText("Continue");
 		triNext_BTN.setFont(Font.font("Verdana",15));
-		triNext_BTN.setOnAction(e -> {  Window.setScene(testlisten_screen); testtranslate.getChildren().remove(timer);testlisten.getChildren().add(0,testrectangle);testlisten.getChildren().add(testlogo);
-		
-			WATERinput.clear();COFFEEinput.clear();BURGERinput.clear();
+		triNext_BTN.setOnAction(e -> {  Window.setScene(testlisten_screen); groups.testtranslate.getChildren().remove(video.timer);groups.screen_testlisten.getChildren().add(0,testrectangle);groups.screen_testlisten.getChildren().add(testlogo);
+			topic1_txt.setText("Food: Listen and Translate!");groups.screen_testlisten.getChildren().add(topic1_txt);
+			WATERinput.clear();COFFEEinput.clear();BURGERinput.clear();  topic1_txt.setFont(Font.font("Verdana",45)); 
+			groups.screen_testlisten.getChildren().add(BURGERinput);groups.screen_testlisten.getChildren().add(COFFEEinput);groups.screen_testlisten.getChildren().add(WATERinput);
+			groups.screen_testlisten.getChildren().add(playburger_BTN);groups.screen_testlisten.getChildren().add(playwater_BTN);groups.screen_testlisten.getChildren().add(playcoffee_BTN);
+			COFFEEinput.setEditable(true);WATERinput.setEditable(true);BURGERinput.setEditable(true);
+			COFFEEinput.setTranslateY(150);WATERinput.setTranslateY(150);BURGERinput.setTranslateY(150);
 			topic1_txt.setText("Food: Translate Spanish audio into English!");
 			WATERinput.setStyle (null);COFFEEinput.setStyle (null);BURGERinput.setStyle (null);
 			
 		});
-		
+		Button testcontinue2 = new Button();
 		testcontinue2.setText("Continue");
 		testcontinue2.setFont(Font.font("Verdana",15));
 		testcontinue2.setLayoutX(1100);
 		testcontinue2.setLayoutY(650);//
-		testcontinue2.setTextFill(Color.RED);
-		testcontinue2.setOnAction(e -> {Window.setScene(testtranslate_screen);testtranslate.getChildren().add(timer);timerplayer.play();Window.setFullScreen(true);test1.getChildren().remove(topic1_txt);test1.getChildren().remove(testrectangle);test1.getChildren().remove(testlogo);testtranslate.getChildren().add(0,testrectangle);testtranslate.getChildren().add(testlogo);
-		;testtranslate.getChildren().add(topic1_txt);topic1_txt.setText("Food: Translate into Spanish in the box!");topic1_txt.setX(250);testtranslate.getChildren().add(coffeewaterburger_txt);
-		testtranslate.getChildren().add(COFFEEinput);testtranslate.getChildren().add(WATERinput);testtranslate.getChildren().add(BURGERinput); testtranslate.getChildren().add(timer); 
+		testcontinue2.setTextFill(Color.RED); 
+		testcontinue2.setOnAction(e -> {video.timerplayer.play();Window.setScene(testtranslate_screen);groups.test1.getChildren().remove(topic1_txt);groups.test1.getChildren().remove(testrectangle);groups.test1.getChildren().remove(testlogo);groups.testtranslate.getChildren().add(0,testrectangle);groups.testtranslate.getChildren().add(testlogo);
+		;groups.testtranslate.getChildren().add(topic1_txt);topic1_txt.setTranslateX(50);topic1_txt.setText("Food: Translate into Spanish in the box!");topic1_txt.setX(250);groups.testtranslate.getChildren().add(coffeewaterburger_txt);
+		groups.testtranslate.getChildren().add(COFFEEinput);groups.testtranslate.getChildren().add(WATERinput);groups.testtranslate.getChildren().add(BURGERinput); groups.testtranslate.getChildren().add(video.timer); 
 		;
 		;;});
 		
@@ -514,14 +417,14 @@ public class Main extends Application {
 		CheckBox test2CheckBox = new CheckBox(); 
 		test2CheckBox.setLayoutX(450);
 		test2CheckBox.setLayoutY(355);
-		test2CheckBox.setOnAction ( e ->{ if (test2CheckBox.isSelected()) { screen_tests.getChildren().add(testset2test_txt);screen_tests.getChildren().add(test2button);
-	        							} else { screen_tests.getChildren().remove(testset2test_txt);screen_tests.getChildren().remove(test2button);}});	
+		test2CheckBox.setOnAction ( e ->{ if (test2CheckBox.isSelected()) { groups.screen_tests.getChildren().add(testset2test_txt);groups.screen_tests.getChildren().add(test2button);groups.screen_tests.getChildren().add(images.sportslogoviewer);
+	        							} else { groups.screen_tests.getChildren().remove(testset2test_txt);groups.screen_tests.getChildren().remove(test2button);groups.screen_tests.getChildren().remove(images.sportslogoviewer);}});	
 		
 		CheckBox test1CheckBox = new CheckBox();
 		test1CheckBox.setLayoutX(450);
 		test1CheckBox.setLayoutY(255);
-		test1CheckBox.setOnAction ( e ->{ if (test1CheckBox.isSelected()) { testset2test_txt.setTranslateY(50); test2CheckBox.setTranslateY(50); screen_tests.getChildren().add(testset1test_txt);testset2_txt.setTranslateY(50);test2button.setLayoutY(450);screen_tests.getChildren().add(test1button);;
-	        							} else { screen_tests.getChildren().remove(testset1test_txt);testset2test_txt.setTranslateY(50);;test2CheckBox.setTranslateY(-50);testset2_txt.setTranslateY(-50);screen_tests.getChildren().remove(test1button);test2button.setTranslateY(-50);}});
+		test1CheckBox.setOnAction ( e ->{ if (test1CheckBox.isSelected()) { testset2test_txt.setTranslateY(50); test2CheckBox.setTranslateY(50); groups.screen_tests.getChildren().add(testset1test_txt);testset2_txt.setTranslateY(50);;groups.screen_tests.getChildren().add(test1button);groups.screen_tests.getChildren().add(images.foodslogo);test2button.setTranslateY(50);images.sportslogoviewer.setTranslateY(50);
+	        							} else { groups.screen_tests.getChildren().remove(testset1test_txt);testset2test_txt.setTranslateY(-50);;test2CheckBox.setTranslateY(-50);testset2_txt.setTranslateY(-50);groups.screen_tests.getChildren().remove(test1button);test2button.setTranslateY(-50);;groups.screen_tests.getChildren().remove(images.foodslogo);images.sportslogoviewer.setTranslateY(-50);}});
 		
 		
 		TextField HPinput = new TextField ();
@@ -536,24 +439,14 @@ public class Main extends Application {
 		BTN_HPinput.setLayoutX(800);
 		BTN_HPinput.setLayoutY(400);
 		BTN_HPinput.setFont(Font.font("Verdana",20));
-		BTN_HPinput.setOnAction(e -> {HPinput.clear();screen_help.getChildren().add(helptext_txt);});
-		
-		TextField UNinput = new TextField ();
-		UNinput.setLayoutX(550);
-		UNinput.setLayoutY(350);
-		UNinput.setFont(Font.font("Verdana",20));
-
-		PasswordField PWinput = new PasswordField ();
-		PWinput.setLayoutX(550);
-		PWinput.setLayoutY(500);
-		PWinput.setFont(Font.font("Verdana",20));
-				
+		BTN_HPinput.setOnAction(e -> {HPinput.clear();groups.screen_help.getChildren().add(helptext_txt);});
+			
 		Button BTN_logout = new Button("log out");
 		BTN_logout.setFont(Font.font("Verdana",15));
 		BTN_logout.setLayoutX(1100);
 		BTN_logout.setLayoutY(650);
 		BTN_logout.setTextFill(Color.RED);
-		BTN_logout.setOnAction(e -> {Window.setScene(loginscreen); Window.setFullScreen(true);screen_login.getChildren().add(0,baserectangle);});
+		BTN_logout.setOnAction(e -> {Window.setScene(loginscreen); Window.setFullScreen(true);groups.screen_login.getChildren().add(0,baserectangle);});
 		//
 		Loginbutton BTN_login = new Loginbutton();
 		BTN_login.setFont(Font.font("Verdana",20));
@@ -562,9 +455,9 @@ public class Main extends Application {
 		BTN_login.setTextFill(Color.BLACK);
 		BTN_login.setText("Log in");
 		BTN_login.setOnAction(e -> {String passText = PWinput.getText();String setStudentPassword = "student";String setTeacherPassword = "teacher";
-		if (passText.equals(setStudentPassword)) {Window.setScene(studentScene); Window.setFullScreen(true); screen_tests.getChildren().add(0,baserectangle);UNinput.clear(); PWinput.clear(); screen_login.getChildren().remove(invalid_txt);screen_tests.getChildren().add(BTN_logout);
-	    } else if (passText.equals(setTeacherPassword)) {Window.setScene(teacherScene); Window.setFullScreen(true); screen_teacher.getChildren().add(0,baserectangle); UNinput.clear(); PWinput.clear(); screen_login.getChildren().remove(invalid_txt); screen_teacher.getChildren().add(BTN_logout);;
-	    } else {screen_login.getChildren().add(invalid_txt);}}); 			
+		if (passText.equals(setStudentPassword)) {Window.setScene(studentScene); Window.setFullScreen(true); groups.screen_tests.getChildren().add(0,baserectangle);name_txt.setText("Student ID : " + UNinput.getText());UNinput.clear(); PWinput.clear(); groups.screen_login.getChildren().remove(invalid_txt);groups.screen_tests.getChildren().add(BTN_logout);
+	    } else if (passText.equals(setTeacherPassword)) {Window.setScene(teacherScene); Window.setFullScreen(true); groups.screen_teacher.getChildren().add(0,baserectangle); UNinput.clear(); PWinput.clear(); groups.screen_login.getChildren().remove(invalid_txt); groups.screen_teacher.getChildren().add(BTN_logout);;
+	    } else {groups.screen_login.getChildren().add(invalid_txt);}}); 			
 
 		Button BTN_returnhelp = new Button("return to login");
 		BTN_returnhelp.setFont(Font.font("Verdana",15));
@@ -572,7 +465,7 @@ public class Main extends Application {
 		BTN_returnhelp.setLayoutY(650);
 		BTN_returnhelp.setTextFill(Color.BLACK);
 		BTN_returnhelp.setOnAction(e -> 
-		{Window.setScene(loginscreen);Window.setFullScreen(true);screen_login.getChildren().add(0,baserectangle);screen_accessibility.getChildren().add(BTN_returnhelp);screen_help.getChildren().remove(baserectangle);screen_accessibility.getChildren().remove(baserectangle);});
+		{Window.setScene(loginscreen);Window.setFullScreen(true);groups.screen_login.getChildren().add(0,baserectangle);groups.screen_accessibility.getChildren().add(BTN_returnhelp);groups.screen_help.getChildren().remove(baserectangle);groups.screen_accessibility.getChildren().remove(baserectangle);});
 		
 		Button BTN_quit = new Button("X");
 		BTN_quit.setTextFill(Color.RED);
@@ -582,28 +475,37 @@ public class Main extends Application {
 		BTN_quit.setLayoutX(1250);
 		BTN_quit.setLayoutY(30);
 		
+		Button BTN_quitresults = new Button("X");
+		BTN_quitresults.setTextFill(Color.RED);
+		BTN_quitresults.setStyle("-fx-background-color:#305494;");
+		BTN_quitresults.setOnAction ( e -> {Window.setScene(studentScene);groups.screen_tests.getChildren().add(0,baserectangle); score.testScore.set(0);});
+		BTN_quitresults.setFont(Font.font("Verdana",30));
+		BTN_quitresults.setLayoutX(1250);
+		BTN_quitresults.setLayoutY(30);
+		
 		Button BTN_help = new Button("  help  ");
 		BTN_help.setFont(Font.font("Verdana",15));
 		BTN_help.setLayoutX(1100);
 		BTN_help.setLayoutY(650);
 		BTN_help.setTextFill(Color.GREEN);
-		BTN_help.setOnAction(e -> {Window.setScene(help); Window.setFullScreen(true);screen_help.getChildren().add(0,baserectangle);screen_accessibility.getChildren().remove(BTN_returnhelp);screen_help.getChildren().add(BTN_returnhelp);});
+		BTN_help.setOnAction(e -> {Window.setScene(help); Window.setFullScreen(true);groups.screen_help.getChildren().add(0,baserectangle);groups.screen_accessibility.getChildren().remove(BTN_returnhelp);groups.screen_help.getChildren().add(BTN_returnhelp);});
 		
 		ImageView helplogo = new ImageView(logo);
 		helplogo.setX(300);
 		helplogo.setY(250);
 		helplogo.setFitWidth(300);
 		helplogo.setFitHeight(300);
-		
+
 		Button BTN_accessibility = new Button();
-		BTN_accessibility.setGraphic(imageview1);
+		BTN_accessibility.setGraphic(settingsviewer);
 		BTN_accessibility.setStyle("-fx-background-color:#305494;");
 		BTN_accessibility.setLayoutX(1100);
 		BTN_accessibility.setLayoutY(115);
-		BTN_accessibility.setOnAction(e -> {Window.setScene(accessibility); Window.setFullScreen(true);screen_accessibility.getChildren().add(0,baserectangle);screen_accessibility.getChildren().add(BTN_returnhelp);});
+		BTN_accessibility.setOnAction(e -> {Window.setScene(accessibility); Window.setFullScreen(true);groups.screen_accessibility.getChildren().add(0,baserectangle);groups.screen_accessibility.getChildren().add(BTN_returnhelp);});
 		
+											//bold text
 		Text[] texts = new Text[] 
-		{testset2_txt, textslider_txt, textbold_txt, invalid_txt, helptext_txt, login_txt, accessibility_txt, username_txt, password_txt, test_txt, testset1test_txt, testset1_txt, topic1_txt, coffeewaterburger_txt, testset2test_txt, testset2_txt,};
+		{testset2_txt, textslider_txt, textbold_txt, invalid_txt, helptext_txt, login_txt, accessibility_txt, username_txt, password_txt, test_txt, testset1test_txt, testset1_txt, topic1_txt, coffeewaterburger_txt, testset2test_txt, testset2_txt,subtitleBox_txt,};
 		
 		boldCheckBox.setOnAction(e -> {
 		    for (Text text : texts) {
@@ -614,50 +516,64 @@ public class Main extends Application {
 		        }
 		    }
 		});
-		
+
 			//login page
-			screen_login.getChildren().add(0,baserectangle);
-			screen_login.getChildren().add(login_txt);
-			screen_login.getChildren().add(username_txt);
-			screen_login.getChildren().add(password_txt);
-			screen_login.getChildren().add(imageview);
-			screen_login.getChildren().add(UNinput);
-			screen_login.getChildren().add(PWinput);
-			screen_login.getChildren().add(BTN_help);
-			screen_login.getChildren().add(BTN_login);
-			screen_login.getChildren().add(BTN_accessibility);
-			screen_login.getChildren().add(BTN_quit);
-			screen_login.getChildren().add(playburger_BTN);
-			screen_login.getChildren().add(playwater_BTN);
+			groups.screen_login.getChildren().add(0,baserectangle);
+			groups.screen_login.getChildren().add(login_txt);
+			groups.screen_login.getChildren().add(username_txt);
+			groups.screen_login.getChildren().add(password_txt);
+			groups.screen_login.getChildren().add(logoviewer);
+			groups.screen_login.getChildren().add(UNinput);
+			groups.screen_login.getChildren().add(PWinput);
+			groups.screen_login.getChildren().add(BTN_help);
+			groups.screen_login.getChildren().add(BTN_login);
+			groups.screen_login.getChildren().add(BTN_accessibility);
+			groups.screen_login.getChildren().add(BTN_quit);
 			//student test screen  
-			screen_tests.getChildren().add(testset1_txt);
-			screen_tests.getChildren().add(testset2_txt);
-			screen_tests.getChildren().add(test_txt);
-			screen_tests.getChildren().add(test1CheckBox); 
-			screen_tests.getChildren().add(test2CheckBox);
-			
-			//teacher test screen
-
+			groups.screen_tests.getChildren().add(testset1_txt);
+			groups.screen_tests.getChildren().add(testset2_txt);
+			groups.screen_tests.getChildren().add(test_txt);
+			groups.screen_tests.getChildren().add(test1CheckBox); 
+			groups.screen_tests.getChildren().add(test2CheckBox);
+			//teacher test  
+			groups.screen_testlisten.getChildren().add(listenclear_BTN);
+			groups.testresults.getChildren().add(score_txt);
 			//help screen 
-			screen_help.getChildren().add(helplogo);
-			screen_help.getChildren().add(HPinput);
-			screen_help.getChildren().add(BTN_HPinput);
+			groups.screen_help.getChildren().add(helplogo);
+			groups.screen_help.getChildren().add(HPinput);
+			groups.screen_help.getChildren().add(BTN_HPinput);
 			//accessibility screen 
-			screen_accessibility.getChildren().add(accessibility_txt);
-			screen_accessibility.getChildren().add(textSizeSlider);
-			screen_accessibility.getChildren().add(textslider_txt);
-			screen_accessibility.getChildren().add(textbold_txt);
-			screen_accessibility.getChildren().add(boldCheckBox);
-			//sports tests correct
-
-			test1.getChildren().add(correct);
-
-			Window.show();
-			Window.setScene(loginscreen);
-			Window.setFullScreenExitHint("");
-			Window.setFullScreen(true);
+			groups.screen_accessibility.getChildren().add(accessibility_txt);
+			groups.screen_accessibility.getChildren().add(textSizeSlider);
+			groups.screen_accessibility.getChildren().add(textslider_txt);
+			groups.screen_accessibility.getChildren().add(textbold_txt);
+			groups.screen_accessibility.getChildren().add(boldCheckBox);
+			groups.screen_accessibility.getChildren().add(subtitlesBool);
+			groups.screen_accessibility.getChildren().add(subtitleBox_txt);
+			//results screen
+			groups.testresults.getChildren().add(BTN_quitresults);
+			groups.testresults.getChildren().add(name_txt);
+			//multiple choice screen
+			groups.test1.getChildren().add(readaloud1_BTN);
 			
-
-
+			choice.correct.setOnAction (e -> {choice.correct.setStyle("-fx-background-color:#50C878;");score.testScore.getAndAdd(1);groups.test1.getChildren().add(choice.testcontinue);
+			groups.test1.getChildren().remove(choice.correct);groups.test1.getChildren().remove(choice.incorrect1);groups.test1.getChildren().remove(choice.incorrect2);
+			groups.test1.getChildren().remove(choice.incorrect3);
+			groups.test1.getChildren().add(choice.correct);});
+			
+			choice.correct1.setOnAction (e -> {choice.correct1.setStyle("-fx-background-color:#50C878;");score.testScore.getAndAdd(1);groups.test1.getChildren().add(choice.testcontinue1);
+			groups.test1.getChildren().remove(choice.correct1);groups.test1.getChildren().remove(choice.incorrect4);groups.test1.getChildren().remove(choice.incorrect5);groups.test1.getChildren().remove(choice.incorrect6);
+			groups.test1.getChildren().add(choice.correct1);});
+			
+			choice.correct2.setOnAction (e -> {choice.correct2.setStyle("-fx-background-color:#50C878;");score.testScore.getAndAdd(1);groups.test1.getChildren().add(testcontinue2);
+			groups.test1.getChildren().remove(choice.correct2);groups.test1.getChildren().remove(choice.incorrect7);groups.test1.getChildren().remove(choice.incorrect8);groups.test1.getChildren().remove(choice.incorrect9);
+			groups.test1.getChildren().add(choice.correct2);});
+			
+			//translation screen
+			groups.testtranslate.getChildren().add(readaloud2_BTN);
+			groups.testtranslate.getChildren().add(video.timer);
+			//sound screen
+			groups.screen_testlisten.getChildren().add(readaloud3_BTN);
+			groups.screen_testlisten.getChildren().add(subtitle);
 	}	
 }
